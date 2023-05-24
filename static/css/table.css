@@ -1,0 +1,56 @@
+
+.pagination {
+  display: inline-block;
+}
+.pagination button {
+  background-color:#00001a;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.pagination button:hover {
+  background-color: #45a049;
+}
+.pagination .active {
+  background-color: #008CBA;
+}
+.dtHorizontalVerticalExampleWrapper {
+
+max-width: 600px;
+margin: 0 auto;
+}
+#dtHorizontalVerticalExample th, td {
+white-space: nowrap;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
+
+.table-wrapper {
+
+overflow-y: scroll;
+overflow-x: scroll;
+height: fit-content;
+max-height: 66.4vh;
+max-width: 120dvh;
+margin-left: 200px;
+
+
+}
+
+.btn{
+  border-radius:5px;
+}
+
+
