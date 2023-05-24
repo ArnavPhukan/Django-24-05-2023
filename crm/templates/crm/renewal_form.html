@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="form-popup" id="myForm4">
+                
+
+    <div class="card card-body bg-white border-light shadow-sm mb-4">
+    <br>
+
+    
+    
+    
+  <h2 class="h5 mb-4">RENEWAL FORM</h2>
+
+  <form method="post" action="{% url 'renewals' %}">
+    {% csrf_token %}
+    <label for="name">Organisation:</label>
+    <select name="cust_org" id="cust_org" class="selectpicker" data-live-search="true"> 
+    {% for i in df1 %}
+
+    <option value="{{i}}">{{i}}</option>
+
+    {% endfor %}
+    </select> 
+    
+    <button type="submit">Search</button>
+  </form>
+
+  {% if error %}
+  <p>{{ error }}</p>
+  {% else %}
+  
+  {% if customer %}
+
+    <form method="POST" action="{% url 'renew_save' %}">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+            <div>
+                <label for="cust_id">Customer ID</label>
+                <input name="cust_id" class="form-control" id="cust_id" type="text" value="{{customer.cust_id}}" required="">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div>
+                <label for="cust_name">Customer Name</label>
+                <input name="cust_name" class="form-control" id="cust_name" type="text" value="{{customer.cust_name}}" required="">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div>
+              <label for="cust_org">Customer Organisation</label>
+              <input name="cust_org" class="form-control" id="cust_org" type="text" value="{{customer.cust_org}}" required="">
+          </div>
+      </div>
+      
+    </div>
+      
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div>
+                    <label for="product">Product</label>
+                    <input name="product" class="form-control" id="product" type="text" required="">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div>
+                    <label for="rdc">Renewal Date(client)</label>
+                    <input name="rdc" class="form-control" id="rdc" type="date" placeholder="Customer Name" required="">
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div>
+                  <label for="rde">Renewal Date(EasyDigify)</label>
+                  <input name="rde" class="form-control" id="rde" type="date" placeholder="Customer Name" required="">
+              </div>
+          </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+              <div>
+                  <label for="remark">Remark</label>
+                  <input name="remark" class="form-control" id="remark" type="text" required="">
+              </div>
+          </div>
+          <div class="col-md-4 mb-3">
+              <div>
+                  <label for="status">Status</label>
+                  <input name="status" class="form-control" id="status" type="text" required="">
+              </div>
+          </div>
+        
+      </div>
+
+
+        
+
+        
+        <div class="mt-3">
+          <button type="submit" class="btn btn-success" style="width: 40%; border-radius: 10px; margin-left: 15px;">Save</button>
+
+          
+          
+          <button type="button" class="btn btn-danger" style="width: 40%; border-radius: 10px; margin-left: 15px;" onclick="closeForm4()">Close</button>
+        </div>
+        
+        
+      </div>
+      <br>
+    
+    </form>
+
+    
+        {% endif %}
+            
+    {% endif %}
+
+  </div> 
+  </div>
+    
+</body>
+</html>

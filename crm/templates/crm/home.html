@@ -1,0 +1,380 @@
+
+{% load static %}
+
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-select.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.Q00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    
+
+    
+    <!-- JavaScript -->
+    <script src="{% static 'js/home.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-select.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    
+    <div class="sidebar-sticky">
+        <img class="image" src="{% static 'img/avator.png' %}">
+        <br>
+    
+        <div class="formsubmit">
+            <br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size:small;" href="{% url 'customer' %}">CUSTOMER FORM</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'worksheet' %}">WORKSHEET FORM</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'renewals' %}">RENEWAL FORM</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'credentials' %}">CREDENTIAL FORM</a><br><br>
+
+        </div>
+
+        <div class="reportsubmit">
+            <br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'getcustomer' %}">CUSTOMER REPORT</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'getworksheet' %}">WORKSHEET REPORT</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'getrenewal' %}">RENEWAL REPORT</a><br><br>
+            <a class="btn btn-success" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" href="{% url 'getcredentials' %}">CREDENTIAL REPORT</a><br><br>
+
+        </div>
+        <br>
+        <br>
+
+        <a href="{% url 'logout_user' %}" style="border-radius: 5px; margin-left: 40px; width: 65%; height: 5%; font-size: small;" class="btn btn-secondary">LOGOUT</a>
+             
+    </div>
+
+
+      
+    <div class="right">
+        <div class="centered">
+            
+
+            {% if status == 'profile' %}
+            {% include 'crm/customer_form.html' %}
+
+            {% elif status == 'work' %}
+            {% include 'crm/worksheet_form.html' %}
+            
+            {% elif status == 'cred' %}
+            {% include 'crm/credentials_form.html' %}
+
+            {% elif status == 'renewal' %}
+            {% include 'crm/renewal_form.html' %}
+
+            {% elif status == 'creport' %}
+            {% include 'crm/customer_report.html' %}
+
+            {% elif status == 'wreport' %}
+            {% include 'crm/worksheet_report.html' %}
+
+            {% elif status == 'rreport' %}
+            {% include 'crm/renewal_report.html' %}
+
+            {% elif status == 'ccreport' %}
+            {% include 'crm/credentials_report.html' %}
+
+            {% elif status == 'sform' %}
+            {% include 'crm/sampleform.html' %}
+
+            
+
+
+            {% else %}
+
+            {% endif %}
+
+
+              
+<!--#######################################################-->
+
+
+<script>
+    $(document).ready(function(){
+
+
+$('#profile_save').click(function(e){
+        e.preventDefault();
+    
+
+var cust_id = $('.uform #cust_id').val();
+var cust_name = $('.uform #cust_name').val();
+var cust_address = $('.uform #cust_address').val();
+var cust_con_per = $('.uform #cust_con_per').val();
+var cust_mobile = $('.uform #cust_mobile').val();
+var cust_tele = $('.uform #cust_tele').val();
+var cust_whatsapp = $('.uform #cust_whatsapp').val();
+var cust_email = $('.uform #cust_email').val();
+var cust_website = $('.uform #cust_website').val();
+var cust_gst = $('.uform #cust_gst').val();
+var cust_city = $('.uform #cust_city').val();
+var cust_state = $('.uform #cust_state').val();
+var cust_country = $('.uform #cust_country').val();
+var cust_pin = $('.uform #cust_pin').val();
+var cust_org = $('.uform #cust_org').val();
+
+
+var data = new FormData();
+
+data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+data.append('cust_id', cust_id);
+data.append('cust_name', cust_name);
+data.append('cust_address', cust_address);
+data.append('cust_con_per', cust_con_per);
+data.append('cust_mobile', cust_mobile);
+data.append('cust_tele', cust_tele);
+data.append('cust_whatsapp', cust_whatsapp);
+data.append('cust_email', cust_email);
+data.append('cust_website', cust_website);
+data.append('cust_gst', cust_gst);
+data.append('cust_city',cust_city);
+data.append('cust_state', cust_state);
+data.append('cust_country', cust_country);
+data.append('cust_pin',cust_pin);
+data.append('cust_org',cust_org);
+
+
+
+$.ajax({
+    url:"{% url 'profile_save' %}",
+    method:"POST",
+    processData:false,
+    contentType:false,
+    mimeType:"multipart/form-data",
+    data:data,
+    dataType: 'json',
+
+    beforeSend:function(){
+        $('#loading_spinner').show();
+        $(":input").prop("disable", true);
+    },
+
+    complete: function(){
+        $('#loading_spinner').hide();
+        $(":input").prop("disable", false);
+    },
+
+    success: function(data){
+        $('.uform')[0].reset();
+        $('#result').html('');
+        $('#result').append('Profile Saved Successfully');
+
+
+    }
+})
+
+
+
+
+
+
+
+    });
+});
+    
+</script>
+
+<!--#######################################################-->
+
+<script>
+    $(document).ready(function(){
+
+
+$('#work_save').click(function(e){
+        e.preventDefault();
+    
+
+var cust_id = $('.uform1 #cust_id').val();
+var cust_name = $('.uform1 #cust_name').val();
+var worktype = $('.uform1 #worktype').val();
+var workprogress = $('.uform1 #workprogress').val();
+var workprogress = $('.uform1 #remarks').val();
+
+
+var data = new FormData();
+
+data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+data.append('cust_id', cust_id);
+data.append('cust_name', cust_name);
+data.append('worktype', worktype);
+data.append('workprogress', workprogress);
+data.append('remarks', remarks);
+
+
+
+
+$.ajax({
+    url:"{% url 'work_save' %}",
+    method:"POST",
+    processData:false,
+    contentType:false,
+    mimeType:"multipart/form-data",
+    data:data,
+    dataType: 'json',
+
+    beforeSend:function(){
+        $('#loading_spinner').show();
+        $(":input").prop("disable", true);
+    },
+
+    complete: function(){
+        $('#loading_spinner').hide();
+        $(":input").prop("disable", false);
+    },
+
+    success: function(data){
+        $('.uform1')[0].reset();
+        $('#result').html('');
+        $('#result').append('Worksheet Saved Successfully');
+
+
+    }
+})
+
+
+    });
+});
+    
+</script>
+
+<!--#######################################################-->
+
+
+<script>
+    $(document).ready(function(){
+
+
+$('#cred_save').click(function(e){
+        e.preventDefault();
+    
+
+var cust_id = $('.uform2 #cust_id').val();
+var cust_name = $('.uform2 #cust_name').val();
+var item = $('.uform2 #item').val();
+var type = $('.uform2 #type').val();
+var plateform = $('.uform2 #plateform').val();
+var username = $('.uform2 #username').val();
+var password = $('.uform2 #password').val();
+var remark = $('.uform2 #remark').val();
+var status = $('.uform2 #status').val();
+
+
+var data = new FormData();
+
+data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+data.append('cust_id', cust_id);
+data.append('cust_name', cust_name);
+data.append('item', item);
+data.append('type', type);
+data.append('plateform', plateform);
+data.append('username', username);
+data.append('password', password);
+data.append('remark', remark);
+data.append('status', status);
+
+
+
+
+$.ajax({
+    url:"{% url 'cred_save' %}",
+    method:"POST",
+    processData:false,
+    contentType:false,
+    mimeType:"multipart/form-data",
+    data:data,
+    dataType: 'json',
+
+    beforeSend:function(){
+        $('#loading_spinner').show();
+        $(":input").prop("disable", true);
+    },
+
+    complete: function(){
+        $('#loading_spinner').hide();
+        $(":input").prop("disable", false);
+    },
+
+    success: function(data){
+        $('.uform2')[0].reset();
+        $('#result').html('');
+        $('#result').append('Credentials Saved Successfully');
+
+
+    }
+})
+
+
+    });
+});
+    
+</script>
+
+<!--#######################################################-->
+
+<script>
+    $(document).ready(function(){
+
+
+$('#renew_save').click(function(e){
+        e.preventDefault();
+    
+
+var cust_id = $('.uform3 #cust_id').val();
+var cust_name = $('.uform3 #cust_name').val();
+var worktype = $('.uform3 #worktype').val();
+var workprogress = $('.uform3 #workprogress').val();
+
+
+var data = new FormData();
+
+data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+data.append('item', item);
+data.append('rdc', rdc);
+data.append('rde', rde);
+
+$.ajax({
+    url:"{% url 'renew_save' %}",
+    method:"POST",
+    processData:false,
+    contentType:false,
+    mimeType:"multipart/form-data",
+    data:data,
+    dataType: 'json',
+
+    beforeSend:function(){
+        $('#loading_spinner').show();
+        $(":input").prop("disable", true);
+    },
+
+    complete: function(){
+        $('#loading_spinner').hide();
+        $(":input").prop("disable", false);
+    },
+
+    success: function(data){
+        $('.uform3')[0].reset();
+        $('#result').html('');
+        $('#result').append('Renewal Saved Successfully');
+
+
+    }
+})
+
+
+    });
+});
+    
+</script>
+        </div>
+    </div>
+    
+
+

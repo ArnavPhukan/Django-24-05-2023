@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<link rel="stylesheet" href="{% static 'css/table.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+</head>
+<body> 
+  <div class="table-wrapper">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact Person</th>
+                <th>Mobile</th>
+                <th>Telephone</th>
+                <th>Whatsapp</th>
+                <th>Email</th>
+                <th>Website</th>
+                <th>GST</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>PIN</th>
+                <th>Organisation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customer %}
+            <tr>
+                <td>{{customer.cust_id}}</td>
+                <td>{{customer.cust_name}}</td>
+                <td>{{customer.cust_address}}</td>
+                <td>{{customer.cust_con_per}}</td>
+                <td>{{customer.cust_mobile}}</td>
+                <td>{{customer.cust_tele}}</td>
+                <td>{{customer.cust_whatsapp}}</td>
+                <td>{{customer.cust_email}}</td>
+                <td>{{customer.cust_website}}</td>
+                <td>{{customer.cust_gst}}</td>
+                <td>{{customer.cust_city}}</td>
+                <td>{{customer.cust_state}}</td>
+                <td>{{customer.cust_country}}</td>
+                <td>{{customer.cust_pin}}</td>
+                <td>{{customer.cust_org}}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+// Setup - add a text input to each footer cell
+$('#example tfoot th').each(function () {
+    var title = $(this).text();
+    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+});
+
+// DataTable
+var table = $('#example').DataTable({
+    initComplete: function ()
+{
+var r = $('#MyDataTable tfoot tr');
+r.find('th').each(function(){
+$(this).css('padding', 8);
+});
+$('#MyDataTable thead').append(r);
+$('#search_0').css('text-align', 'center');
+},
+});
+});
+</script> 
+</body>
+</html>
